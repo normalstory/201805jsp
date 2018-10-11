@@ -19,7 +19,7 @@ public class UserServiceTest_Basic {
 		System.out.println("list.size() : "+ list.size());
 		
 		/***Then 결과가 어떠해야하는지 정의 : (기대값,결과값) ***/
-		assertEquals(5,list.size());
+		assertEquals(105,list.size());
 	}
 	
 	@Test

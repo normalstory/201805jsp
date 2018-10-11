@@ -3,7 +3,10 @@ package kr.or.ddit.user.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.or.ddit.user.dao.UserDao;
+import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
 
 import org.junit.After;
@@ -45,13 +48,13 @@ public class UserServiceTest {
 	@Before
 	public void before(){
 		//test="2345";	//static에러 반드시 이어야한다
-		System.out.println("[ BeforeClass]");
+		System.out.println("[ Before]");
 		userServive = new UserService();
 	}
 	
 	@After 
 	public void after(){
-		System.out.println("[ AfterClass]");
+		System.out.println("[ After]");
 	}
 	
 	
@@ -67,7 +70,7 @@ public class UserServiceTest {
 		System.out.println("list.size() : "+ list.size());
 		
 		/***Then 결과가 어떠해야하는지 정의 : (기대값,결과값) ***/
-		assertEquals(5,list.size());
+		assertEquals(105,list.size());
 	}
 	
 	@Test
@@ -109,4 +112,22 @@ public class UserServiceTest {
 		assertEquals("브라운",userVo.getName());
 	}
 
+	@Test
+	public void selectUserPageListTest() {
+		
+		PageVo pageVo = new PageVo();
+		pageVo.setPage(11);
+		pageVo.setPageSize(10);
+		
+		//List<UserVo> pageList = (List<UserVo>)userServive.selectUserPageList(pageVo);
+		Map<String,Object> resultMap = userServive.selectUserPageList(pageVo);
+		List<UserVo> userList = (List<UserVo>)resultMap.get("userList");
+		
+		int pageCnt = (Integer)resultMap.get("pageCnt");		
+		System.out.println("3 pageList.size() : "+userList.size());
+		
+		assertEquals(5,userList.size());
+		assertEquals(11,pageCnt);
+		
+	}
 }

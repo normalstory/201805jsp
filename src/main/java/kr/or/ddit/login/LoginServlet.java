@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet{
 		//2-2 이제, DB로 대체 
 			// 	사용자가 전송한 파라미터로 사용자 조회 : 유저서비스를 통해 
 		UserServiceInf userService = new UserService();
+		
 		UserVo userVo= userService.selectUser(userId);
 			
 

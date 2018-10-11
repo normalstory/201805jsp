@@ -13,7 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 //jspuser테이블 전체 조회 쿼리 
-public class UserDao implements UserDaoInf{
+public class UserDao_b4sessionClose implements UserDaoInf{
 //select query id : selectUserAll  -> method : selectUserAll
 	
 	public List<UserVo> selectUserAll(){
@@ -23,64 +23,36 @@ public class UserDao implements UserDaoInf{
 		//selectOne : 조회 데이터가 한 건일때 
 		//selectList : 여러건의 데이터 조회 
 		//메소드 인자: 문자열 - 메퍼(xml) 네임스페이스(모듈명).쿼리아이디 
-		
-		List<UserVo> userList = session.selectList("user.selectUserAll");
-	/*	session.rollback();
-		session.commit();*/
-		session.close();
-		
-		return userList;
+		return session.selectList("user.selectUserAll");
 	}
 	
-	//아이디로 사용자 셀렉
 	public UserVo selectUser(String param){
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session= factory.openSession();
 		
-		//파라미터 추가
-		UserVo userVo = session.selectOne("user.selectUser", param);
-		session.close();
-		
-		return userVo;
+		//파라미터 추가 
+		return session.selectOne("user.selectUser", param);
 	}
 	
-	//객체로 사용자 셀렉
-	public UserVo selectUser(UserVo user){
+	//오버로딩
+	public UserVo selectUser(UserVo userVo){
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session= factory.openSession();
 		
-		UserVo userVo = session.selectOne("user.selectUserByVo", user);
-		session.close();
-		
-		return userVo;
+		return session.selectOne("user.selectUserByVo", userVo);
 	}
 	
-	//페이징 처리 
+	
 	public List<UserVo> selectUserPageList(PageVo pageVo){
 		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session= factory.openSession();
 		
-		List<UserVo> userList = session.selectList("user.selectUserPageList", pageVo);
-		session.close();
-		
-		return userList;
+		return session.selectList("user.selectUserPageList", pageVo);
 	}
-	
-	/**
-	* Method : getUsetCnt
-	* 작성자 : pc03
-	* 변경이력 :
-	* @return
-	* Method 설명 : 사용자 전체 건수조회
-	*/
+
 	@Override
 	public int getUsetCnt() {
-		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
-		SqlSession session= factory.openSession();
-		
-		int totaluserCount = session.selectOne("user.getUsetCnt");
-		session.close();
-		
-		return totaluserCount;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
