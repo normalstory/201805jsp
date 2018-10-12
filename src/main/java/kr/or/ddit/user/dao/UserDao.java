@@ -6,8 +6,8 @@ package kr.or.ddit.user.dao;
 import java.util.List;
 
 import kr.or.ddit.db.SqlFactoryBuilder;
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -82,5 +82,47 @@ public class UserDao implements UserDaoInf{
 		session.close();
 		
 		return totaluserCount;
+	}
+
+	/**
+	* Method : insertUser
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param userVo
+	* @return
+	* Method 설명 : 사용자 등록
+	*/
+	@Override
+	public int insertUser(UserVo userVo) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session= factory.openSession();
+		
+		int insertCnt = session.insert("user.insertUser",userVo);
+		//커밋
+		session.commit();
+		session.close();
+		
+		return insertCnt;
+	}
+
+	/**
+	* Method : deleteUser
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 사용자 삭제 
+	*/
+	@Override
+	public int deleteUser(String userId) {
+		SqlSessionFactory factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session= factory.openSession();
+		
+		int deleteUser = session.delete("user.deleteUser",userId);
+		//커밋
+		session.commit();
+		session.close();
+		
+		return deleteUser;
 	}
 }

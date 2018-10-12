@@ -2,12 +2,15 @@ package kr.or.ddit.user.service;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.user.dao.UserDao;
-import kr.or.ddit.user.model.PageVo;
+import kr.or.ddit.user.dao.UserDaoInf;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -32,7 +35,7 @@ public class UserServiceTest {
 	//@AfterClass
 
 	private UserServiceInf userServive;
-	
+	private final String TEST_USERID= "testUserId";
 	
 	@BeforeClass
 	public static void beforeClass(){
@@ -50,6 +53,7 @@ public class UserServiceTest {
 		//test="2345";	//static에러 반드시 이어야한다
 		System.out.println("[ Before]");
 		userServive = new UserService();
+		userServive.deleteUser(TEST_USERID);
 	}
 	
 	@After 
@@ -70,7 +74,7 @@ public class UserServiceTest {
 		System.out.println("list.size() : "+ list.size());
 		
 		/***Then 결과가 어떠해야하는지 정의 : (기대값,결과값) ***/
-		assertEquals(105,list.size());
+		assertEquals(108,list.size());
 	}
 	
 	@Test
@@ -126,8 +130,40 @@ public class UserServiceTest {
 		int pageCnt = (Integer)resultMap.get("pageCnt");		
 		System.out.println("3 pageList.size() : "+userList.size());
 		
-		assertEquals(5,userList.size());
+		assertEquals(8,userList.size());
 		assertEquals(11,pageCnt);
+	}
+	
+
+	/**
+	* Method : insertUserTest
+	* 작성자 : pc03
+	* 변경이력 :
+	* Method 설명 : 사용자 등록 
+	*/
+	@Test 
+	public void insertUserTest(){
+		/***Given***/
+		//UserVo 준비
+		UserVo userVo = new UserVo();
+		userVo.setUserId(TEST_USERID);
+		userVo.setName("nameee13");
+		userVo.setPass("passee13");
+		userVo.setAdd1("addr1ee");
+		userVo.setAdd2("addr2ee");
+		userVo.setZipcd("zipcd");
+		GregorianCalendar gc = new GregorianCalendar(2018,7,8);
+		userVo.setBirth(new Date(gc.getTimeInMillis()));
+		userVo.setEmail("email@gmail.com");
+		userVo.setTel("12312341234");
 		
+		/***When***/
+		//userDao.insertUser()
+		int cnt = userServive.insertUser(userVo);
+		System.out.println("cnt : "+cnt);
+		
+		/***Then***/
+		//입력건수 비교
+		assertEquals(1, cnt);
 	}
 }

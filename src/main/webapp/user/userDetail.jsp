@@ -38,8 +38,9 @@
 			System.out.println("user detail userVo : "+userVo);
 			%>
 			
-				<form class="form-horizontal" role="form">
-				
+			<form class="form-horizontal" role="form">
+				<!-- form method="post" action="/userFormUpdate" class="form-horizontal" role="form">
+				<input type="hidden" > </input-->
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
@@ -100,8 +101,15 @@
 						<div class="col-sm-10">
 							<label class="control-label"><%=user.getTel() %></label>
 						</div>
+					</div>	
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default" href="/userFormUpdate?userId="+<%=user.getUserId() %>>회원정보 수정</button>
+						</div>
 					</div>
 				</form>
+				
 			</div>
 		</div>
 	</div>

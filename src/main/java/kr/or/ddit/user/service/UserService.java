@@ -6,29 +6,26 @@ import java.util.Map;
 
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.dao.UserDaoInf;
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 public class UserService implements UserServiceInf{
 
-	//UserDao dao = new UserDao();
+	UserDao userdao = new UserDao();
 	
 	@Override
 	public List<UserVo> selectUserAll() {
-		UserDaoInf dao = new UserDao();
-		return dao.selectUserAll();
+		return userdao.selectUserAll();
 	}
 
 	@Override
 	public UserVo selectUser(String param) {
-		UserDaoInf dao = new UserDao();
-		return dao.selectUser(param);
+		return userdao.selectUser(param);
 	}
 
 	@Override
 	public UserVo selectUser(UserVo userVo) {
-		UserDaoInf dao = new UserDao();
-		return dao.selectUser(userVo);
+		return userdao.selectUser(userVo);
 	}
 
 	
@@ -42,7 +39,6 @@ public class UserService implements UserServiceInf{
 	*/
 	@Override
 	public 	Map<String,Object> selectUserPageList(PageVo pageVo) {
-		UserDaoInf userdao = new UserDao();
 		
 		//페이지에 해당하는 유저리스트(1~10건)
 		List<UserVo> userList = userdao.selectUserPageList(pageVo);
@@ -58,6 +54,16 @@ public class UserService implements UserServiceInf{
 		//(int)Math.ceil((double)total/pageSize)
 		
 		return resultMap;
+	}
+
+	@Override
+	public int insertUser(UserVo userVo) {
+		return userdao.insertUser(userVo);
+	}
+
+	@Override
+	public int deleteUser(String userId) {
+		return userdao.deleteUser(userId);
 	}
 
 }

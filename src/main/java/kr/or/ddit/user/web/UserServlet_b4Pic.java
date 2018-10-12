@@ -16,8 +16,8 @@ import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
 import kr.or.ddit.util.model.PageVo;
 
-@WebServlet(urlPatterns={"/userAllList", "/userPageList", "/userDetail"})
-public class UserServlet extends HttpServlet {
+//@WebServlet(urlPatterns={"/userAllList", "/userPageList", "/userDetail"})
+public class UserServlet_b4Pic extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	
@@ -60,11 +60,10 @@ public class UserServlet extends HttpServlet {
 		// 사용자 아이디에 해당하는 해당 사용자 정보조회
 		UserServiceInf userService = new UserService();
 		UserVo userVo = userService.selectUser(id);
-		System.out.println("userVo : "+userVo);
 		
 		// jsp로 위임을 위해 사용자 정보를 request에 저장 
 		request.setAttribute("userVo", userVo);
-		
+
 		// 상세화면으로 위임 
 		request.getRequestDispatcher("/user/userDetail.jsp").forward(request, response);
 	}

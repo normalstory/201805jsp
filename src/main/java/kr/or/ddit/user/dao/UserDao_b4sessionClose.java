@@ -6,8 +6,8 @@ package kr.or.ddit.user.dao;
 import java.util.List;
 
 import kr.or.ddit.db.SqlFactoryBuilder;
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -52,6 +52,18 @@ public class UserDao_b4sessionClose implements UserDaoInf{
 
 	@Override
 	public int getUsetCnt() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertUser(UserVo userVo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteUser(String userId) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -27,18 +27,19 @@
 <!-- 다음 주소 api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
+			<% UserVo user = (UserVo)request.getAttribute("userVo"); %>
 <script>
 $(document).ready(function(){
 	//개발과정 기본값 설정
-	            $("#userId").val();
-	            $("#name").val("testUserId");
-	            $("#pass").val("Pass1234");
-	            $("#addr1").val("대전 중구 중앙로76");
-	            $("#addr2").val("영민빌딩 2층 대덕인재개발원");
-	            $("#zipcd").val("34940");
-	            $("#birth").val("2018-08-08");
-	            $("#email").val("newUser@gmail.com");
-	            $("#tel").val("0422228202");
+	            $("#userId").val(<%=user.getUserId()%>);
+	            $("#name").val(<%=%>);
+	            $("#pass").val(<%=%>);
+	            $("#addr1").val(<%=%>);
+	            $("#addr2").val(<%=%>);
+	            $("#zipcd").val(<%=%>);
+	            $("#birth").val(<%=%>);
+	            $("#email").val(<%=%>);
+	            $("#tel").val(<%=%>);
 	
 	//생일 input datepicker 적용 
 	$("#birth").datepicker(
@@ -93,7 +94,7 @@ $(document).ready(function(){
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<form method="post" action="/userForm" class="form-horizontal" role="form" enctype="multipart/form-data">
+				<form method="post" action="/userFormUpdate?userId="+<%=user.getUserId()+"\""%> class="form-horizontal" role="form" enctype="multipart/form-data">
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>

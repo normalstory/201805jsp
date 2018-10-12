@@ -3,8 +3,8 @@ package kr.or.ddit.user.service;
 import java.util.List;
 import java.util.Map;
 
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 public interface UserServiceInf {
 	
@@ -22,4 +22,25 @@ public interface UserServiceInf {
 	* Method 설명 : 사용자 페이징 조회 
 	*/
 	Map<String,Object> selectUserPageList(PageVo pageVo);
+	
+
+	/**
+	* Method : insertUser
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param userVo
+	* @return
+	* Method 설명 : 사용자 등록
+	*/
+	int insertUser(UserVo userVo);
+
+	/**
+	* Method : deleteUser
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 사용자 삭제 
+	*/
+	int deleteUser(String userId);
 }

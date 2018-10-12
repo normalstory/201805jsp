@@ -9,7 +9,7 @@ public class UserVo {
 	private String addr1;
 	private String addr2;
 	private String zipcd;
-	private Date birth;
+	private Date   birth;
 	private String email;
 	private String tel;
 	private String profile;
