@@ -42,4 +42,14 @@ public interface UserDaoInf {
 	* Method 설명 : 사용자 삭제 
 	*/
 	int deleteUser(String userId);
+	
+	/**
+	* Method : updateUser
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param userVo
+	* @return
+	* Method 설명 : 사용자 정보 수정
+	*/
+	int updateUser(UserVo userVo);
 }

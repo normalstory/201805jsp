@@ -35,6 +35,9 @@ public class LoginServlet extends HttpServlet{
 		//1
 		String userId 	= req.getParameter("userId");
 		String password = req.getParameter("password");
+		// 확인용 테스트
+		System.out.println("userId :" + userId);
+		System.out.println("password : "+ password);
 		
 		//2 아이디, 비번을 DB대신 상수로 대체 
 		//UserDao userDao = new UserDao();   <----- 컨트롤 > 서비스 > DAO > 서블릿

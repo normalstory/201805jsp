@@ -2,14 +2,25 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
 	<properties resource="kr/or/ddit/db/db.properties" />
 
-	<typeAliases>
-		<typeAlias type="kr.or.ddit.user.model.UserVo" alias="userVo"/>
-		<typeAlias type="kr.or.ddit.util.model.PageVo" alias="pageVo"/>
-	</typeAliases>
 
+	<typeAliases>
+		<typeAlias type="kr.or.ddit.user.model.UserVo"
+			alias="userVo" />
+		<typeAlias type="kr.or.ddit.util.model.PageVo"
+			alias="pageVo" />
+	</typeAliases>
+	
+	<!--  참조 : https://taetaetae.github.io/2017/03/23/oracle-mybatis-date/
+		     - 오라클 + mybatis 환경에서 Date타입을 다루기 위해서는 타입핸들러를 명시적으로 만들어줘야 한다
+	      참조 : http://www.mybatis.org/mybatis-3/ko/configuration.html#typeHandlers -->
+	<typeHandlers>
+		<typeHandler handler="kr.or.ddit.util.CustomDateHandler" javaType="java.util.Date" jdbcType="DATE"/>
+	</typeHandlers>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -21,6 +32,7 @@
 			</dataSource>
 		</environment>
 	</environments>
+
 	<mappers>
 		<mapper resource="kr/or/ddit/db/temp.xml" />
 		<mapper resource="kr/or/ddit/db/user.xml" />

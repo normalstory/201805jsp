@@ -36,6 +36,7 @@ public class UserFormServlet extends HttpServlet {
 		
 
 		
+		
 		// + 프로필 읽어오기
 		Part profilePart = request.getPart("profile");
 		System.out.println("profilePart.getContentType() : "+ profilePart.getContentType());
@@ -50,14 +51,15 @@ public class UserFormServlet extends HttpServlet {
 		String fileName = StringUtil.getFileNameFromHeader(contentDispostion);
 		
 		
-		System.out.println("name : "+"D:\\A_TeachingMaterial\\6.JspSrpgin\\upload\\"+fileName);
-		
 		//파일 쓰기 1
 		//profilePart.write("D:\\A_TeachingMaterial\\6.JspSrpgin\\upload\\"+fileName);
 
 		//파일 쓰기 2
 		String path = getServletContext().getRealPath("/profile"); //url정보를 파일경로로 변경해주는 역할 수행
 					  // ->  in jsp  = <%= application.getRealPath("/profile") %>		
+
+		
+		System.out.println("name : "+path+ File.separator + fileName);
 		
 		profilePart.write(path + File.separator + fileName);
 		profilePart.delete();	//파일 업로드 과정에서 사용한 디스크 임시영역 부분을 삭제해줌

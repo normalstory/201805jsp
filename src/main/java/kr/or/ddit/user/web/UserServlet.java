@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
+import kr.or.ddit.util.CustomDateHandler;
 import kr.or.ddit.util.model.PageVo;
 
 @WebServlet(urlPatterns={"/userAllList", "/userPageList", "/userDetail"})
@@ -57,10 +58,12 @@ public class UserServlet extends HttpServlet {
 		String id = request.getParameter("userId");
 				
 		System.out.println("id : "+id);
+		
 		// 사용자 아이디에 해당하는 해당 사용자 정보조회
 		UserServiceInf userService = new UserService();
 		UserVo userVo = userService.selectUser(id);
 		System.out.println("userVo : "+userVo);
+		System.out.println("date : "+userVo.getBirth());
 		
 		// jsp로 위임을 위해 사용자 정보를 request에 저장 
 		request.setAttribute("userVo", userVo);

@@ -66,4 +66,9 @@ public class UserService implements UserServiceInf{
 		return userdao.deleteUser(userId);
 	}
 
+	@Override
+	public int updateUser(UserVo userVo) {
+		return userdao.updateUser(userVo);
+	}
+
 }
