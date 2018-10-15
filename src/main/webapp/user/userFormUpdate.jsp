@@ -72,7 +72,8 @@ $(document).ready(function(){
 		$("#pP").css('display','none');
 		
 		//여기까지 (안나옮)
-		$("img").attr('src','/Users/bhuanchanwoo/git/201805jsp/src/main/webapp/profile/noimage.png');
+		//$("img").attr('src','/Users/bhuanchanwoo/git/201805jsp/src/main/webapp/profile/noimage.png');
+		$("img").attr('src','D:\A_TeachingMaterial\6.JspSrpgin\workspace\jsp\src\main\webapp\profile\noimage.png');
 		
 		//-> 디데일.jsp ->(버튼)파라미터 보내기 -> form 다시 입력한 후 저장(업데이트)하기 -> 리스트 페이지로 
 		
@@ -165,7 +166,7 @@ $(document).ready(function(){
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">생년월일</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="birth" name="birth" value="<%=user.getBirth() %>"
+							<input type="text" class="form-control" id="birth" name="birth" value="<%=user.getBirthFomat(user.getBirth())%>"
 								placeholder="생년월일">
 						</div>
 					</div>

@@ -23,10 +23,10 @@
 			<h2 class="form-signin-heading">Please sign in</h2>
 			
 			<label for="inputId" class="sr-only">UserId</label>
-			<input type="text" name="userId" value="sally"
+			<input type="text" name="userId" value="brown"
 				class="form-control" placeholder="아이디를 입력하세요"> <br />
 			
-			<input type="password" name="password" value="Pass1234"
+			<input type="password" name="password" value="brownpass"
 				class="form-control" placeholder="비밀번호를 입력하세요"> <br />
 				
 			<label for="inputPassword" class="sr-only">Password</label>	
