@@ -60,7 +60,7 @@
  	   참조(동적 SQL) : http://www.mybatis.org/mybatis-3/ko/dynamic-sql.html -->
   <update id="updateUser" parameterType="userVo">
   	update jspuser 
-   <set>
+    <set>
     	<if test="profile!=null">profile = #{profile},</if>
     	<if test="birth!=null">birth = #{birth},</if>
     	name = #{name}, pass = #{pass}, 
