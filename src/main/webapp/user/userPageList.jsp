@@ -100,7 +100,7 @@ System.out.println(userList.size());
 									<td><%=user.getRnum()%></td>
 									<td><%=user.getUserId()%></td>
 									<td><%=user.getName()%></td>
-									<td><%=user.getBirth()%></td>
+									<td><%=user.getBirthFomat(user.getBirth())%></td>
 								</tr>
 								<% } %>
 							</table>

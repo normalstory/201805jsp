@@ -3,7 +3,7 @@
 
 
 ### Database 분리(Home mac) ###
-*.properties
+src/main/resources/kr/or/ddit/db/db.properties
 
 
 ### Eclipse ###
