@@ -11,4 +11,30 @@ public class StringUtil {
 		}
 		return fileName;
 	}
+
+	public static String getCookie(String cookieString, String key) {
+		//"rememberMe=Y; userId=brown; etc=test"
+		String[] cookies = cookieString.split("; ");
+		
+		String cookieValue="";
+		for(String str: cookies){
+			System.out.println("str : "+ str);
+			
+			if(str.startsWith(key+"=")){
+				cookieValue = str.substring((key+"=").length());
+			}
+		}
+		
+//		int beginIndex =cookieString.indexOf(string);
+//		int endIndex =cookieString.lastIndexOf("; ");
+//		System.out.println("beginIndex :"+beginIndex);
+//		System.out.println("endIndex :"+endIndex);
+		
+//		String name = cookieString.substring(beginIndex, endIndex);
+//		System.out.println("name :"+name);
+		
+		return cookieValue;
+	}
+	
+	
 }

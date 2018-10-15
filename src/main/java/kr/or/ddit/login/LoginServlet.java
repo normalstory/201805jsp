@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,37 @@ public class LoginServlet extends HttpServlet{
 		//1
 		String userId 	= req.getParameter("userId");
 		String password = req.getParameter("password");
+		
+		//remember-me 추가  -> 쿠키생성
+		String rememberMe = req.getParameter("remember-me");
+		System.out.println("rememberMe : "+rememberMe);
+		if(rememberMe==null){
+			//아이디 기억 안사용
+			Cookie[] cookies = req.getCookies();	//다 가져온다
+			for(Cookie cookie :cookies ){
+				System.out.println("> before cookie : "+ cookie.getName());
+				
+				//세션은 삭제 메서드 없다
+				if(cookie.getName().equals("rememberMe") || 
+				   cookie.getName().equals("userId")){
+					
+					cookie.setMaxAge(0);
+					System.out.println("< after cookie : "+ cookie.getName());
+					
+					resp.addCookie(cookie);
+				}
+			}
+			
+		}else{
+			//아이디 기억 사용
+			Cookie cookie = new Cookie("rememberMe", "Y");
+			Cookie userIdCookie = new Cookie("userId",userId);
+			
+			resp.addCookie(cookie);
+			resp.addCookie(userIdCookie);
+		}
+		
+		
 		// 확인용 테스트
 		System.out.println("userId :" + userId);
 		System.out.println("password : "+ password);
