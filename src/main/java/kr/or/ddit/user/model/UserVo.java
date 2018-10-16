@@ -52,20 +52,21 @@ public class UserVo {
 		this.pass = pass;
 	}
 
-	public String getAdd1() {
+
+	public String getAddr1() {
 		return addr1;
 	}
 
-	public void setAdd1(String add1) {
-		this.addr1 = add1;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
 
-	public String getAdd2() {
+	public String getAddr2() {
 		return addr2;
 	}
 
-	public void setAdd2(String add2) {
-		this.addr2 = add2;
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 
 	public String getZipcd() {

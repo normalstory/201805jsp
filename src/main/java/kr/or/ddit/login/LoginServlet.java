@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet{
 //			UserVo userVo = getUser(userId);
 //			request.setAttribute("userVo", userVo);  //request 객체 : 개발자가 로직을 통해 저장하는 부분 VS 파라미터 
 			//세션객체에 넣기 
-			req.getSession().setAttribute("userVo", userVo);
+			req.getSession().setAttribute("S_USER", userVo);
 			
 
 			//3-1)-> main.jsp로 이동 

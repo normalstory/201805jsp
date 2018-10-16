@@ -1,14 +1,22 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<% 
+<% request.setAttribute("test", "test"); %>
+<script type="text/javascript">
+	var test1 = "<%=request.getAttribute("test") %>";
+	var test2 = "${test}";
+</script>
+
+    
+<%-- 
 	UserVo userVo = (UserVo)session.getAttribute("userVo"); 
 	String hello ="";
 	if(userVo!=null){
 		hello = " | "+userVo.getName()+"님 안녕하세요";
 	}
-%>
+--%>
 	
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
@@ -20,7 +28,9 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">JSP/SPRING	<%= hello %></a>
+			<%-- a class="navbar-brand" href="#">JSP/SPRING	<%--= hello --%><%-- ${userVo.name}님 안녕하세요</a> --%>
+			<a class="navbar-brand" href="#">JSP/SPRING	 
+			<c:if test="${S_USER.name!=null}"> ${S_USER.name}님 </c:if> 안녕하세요</a> 
 			
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">

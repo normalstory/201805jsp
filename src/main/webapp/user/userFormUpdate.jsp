@@ -143,7 +143,7 @@ $(document).ready(function(){
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="addr1" name="addr1" value="<%=user.getAdd1() %>"
+							<input type="text" class="form-control" id="addr1" name="addr1" value="<%=user.getAddr1() %>"
 								placeholder="주소" readonly="readonly">
 							<!-- 주소검색 버튼 -->
 							<button id="addrSearchBtn" type="button" class="btn btn-default">주소검색</button>
@@ -152,7 +152,7 @@ $(document).ready(function(){
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">주소 상세</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="addr2" name="addr2" value="<%=user.getAdd2() %>"
+							<input type="text" class="form-control" id="addr2" name="addr2" value="<%=user.getAddr2() %>"
 								placeholder="주소 상세">
 						</div>
 					</div>

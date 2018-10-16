@@ -146,7 +146,7 @@ public class UserServlet extends HttpServlet {
 		
 		//application - a사용자가 1페이지 조회하는 동안 b사용자가 5페이지를 조회하면 a 사용자는 5페이지를 보게된다 
 			//	-> 설정과 관련된 부분 값을 저장(사용) 
-		getServletContext().setAttribute("userList", userList);
+		//getServletContext().setAttribute("userList", userList);
 		
 		//session - 어느 페이지에 가도 사용자의 정보(이름)이 보여야 한다, 상시 자주 참조, 데이터가 많은 경우 과부화(OOM) 발생
 			//	-> 프로토컬의 특성상 적어도 30분동안 유효 

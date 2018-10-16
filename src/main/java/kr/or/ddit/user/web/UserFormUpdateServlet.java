@@ -93,8 +93,8 @@ public class UserFormUpdateServlet extends HttpServlet {
 		userVo.setUserId(userId); 
 		userVo.setName(name); 
 		userVo.setPass(pass); 
-		userVo.setAdd1(addr1); 
-		userVo.setAdd2(addr2); 
+		userVo.setAddr1(addr1); 
+		userVo.setAddr2(addr2); 
 		userVo.setZipcd(zipcd);
 		userVo.setEmail(email); 
 		userVo.setTel(tel); 

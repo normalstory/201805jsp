@@ -41,13 +41,14 @@ try {
 	<canvas id="myCanvas" width="200" height="200" style="border:1px solid #000000"></canvas>
 	
 	<%if(rs.next()){%>
-	<img id="scream" width="220" height="277" src="<%=rs.getString("pic")%>" alt="The Scream">
-	<%}%>
+
 	
 </body>
 	<script>
 		var canvas = document.getElementById("myCanvas");
 		var ctx = canvas.getContext("2d");
+		var ctxbg = canvas.getContext("2d");
+	    var imageObj = new Image();
 		ctx.fillStyle = "#FF0000";
 		
 		// 사각형 그리기 <- 두 점이 필요하다 
@@ -57,14 +58,28 @@ try {
 		ctx.beginPath();
 		ctx.arc(100,100,100,0,2*Math.PI);	//중심 x좌표,중심 y좌표,반지름
 		ctx.stroke();
+		ctxbg.arc(100,100,100,0,2*Math.PI);	//중심 x좌표,중심 y좌표,반지름
+		ctxbg.stroke();
 		
 		//텍스트 
 		ctx.font = "60px Arial";
 		
-		<%if(rs.next()){%>
-			ctx.fillText("<%=rs.getString("name")%>",10,115);
-		    var img = document.getElementById("<%=rs.getString("pic")%>");
-		    ctx.drawImage(img, 10, 10);
+		ctx.fillText("<%=rs.getString("name")%>",10,115);
+	    // ctx.drawImage(img, 10, 10);
+		// context.fillStyle = "url('http://www.samskirrow.com/background.png')";
+		
+		//imageObj.onload = function() {
+		//	ctxbg.drawImage(imageObj, 69, 50);
+    	//  };
+      		imageObj.src = '<%=rs.getString("pic")%>';
+      
+      var bkGround = new Image();
+      bgImage.src = '/images/backGround.jpg';
+      bkGround.onload = function(){
+      ctx.drawImage(bkGround,69,50);   
+      }​
+    </script>
+  </body>
 		<%}%>
 	</script>
 </html>

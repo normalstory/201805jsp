@@ -2,6 +2,8 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -47,21 +49,14 @@
 									<th>생일</th>
 								</tr>
 
-								<!-- userList loop 출력 -->
-								<%
-										List<UserVo> userList= (List<UserVo>)request.getAttribute("userList");
-										System.out.println(userList.size());
-										
-										int i=1;
-										for( UserVo user : userList){
-										%>
-								<tr>
-									<td><%=i++%></td>
-									<td><%=user.getUserId()%></td>
-									<td><%=user.getName()%></td>
-									<td><%=user.getBirthFomat(user.getBirth())%></td>
-								</tr>
-								<% } %>
+								<c:forEach items="${userList }" var="vo" varStatus="status">
+									<tr>
+										<td>${status.index +1 }</td>
+										<td>${vo.userId }</td>
+										<td>${vo.name }</td>
+										<td><fmt:formatDate value="${vo.birth }" pattern="yyyy-MM-dd"/></td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 
