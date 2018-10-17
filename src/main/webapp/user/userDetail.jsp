@@ -43,12 +43,8 @@
 						<div class="col-sm-10">
 
 							<c:choose>
-								<c:when test="${userVo.profile!=null}">
-									<c:set var="profile" value="${userVo.profile}" />
-								</c:when>
-								<c:otherwise>
-									<c:set var="profile" value="/profile/noimage.png" />
-								</c:otherwise>
+								<c:when test="${userVo.profile!=null}"> <c:set var="profile" value="${userVo.profile}" /> </c:when>
+								<c:otherwise> <c:set var="profile" value="/profile/noimage.png" /> </c:otherwise>
 							</c:choose>
 
 							<div id="imgFrame">
@@ -100,8 +96,8 @@
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">생일</label>
 						<div class="col-sm-10">
-							<label class="control-label"><fmt:formatDate
-									value="${userVo.birth }" pattern="yyyy-MM-dd" /></label>
+							<label class="control-label">
+							<fmt:formatDate value="${userVo.birth }" pattern="yyyy-MM-dd" /></label>
 						</div>
 					</div>
 					<div class="form-group">
