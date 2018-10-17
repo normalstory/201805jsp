@@ -135,4 +135,17 @@ public class UserVo {
 				+ rnum + "]";
 	}
 
+	
+	/**
+	* Method : authPass
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param encryptPass
+	* @return
+	* Method 설명 : 비밀번호 검증
+	*/
+	public boolean authPass(String encryptPass) {
+		return getPass().equals(encryptPass);
+	}
+
 }

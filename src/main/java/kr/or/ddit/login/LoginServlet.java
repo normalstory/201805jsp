@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.or.ddit.encript.sha.KISA_SHA256;
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
@@ -43,6 +44,7 @@ public class LoginServlet extends HttpServlet{
 		if(rememberMe==null){
 			//아이디 기억 안사용
 			Cookie[] cookies = req.getCookies();	//다 가져온다
+			
 			for(Cookie cookie :cookies ){
 				System.out.println("> before cookie : "+ cookie.getName());
 				
@@ -86,11 +88,16 @@ public class LoginServlet extends HttpServlet{
 		System.out.println("userVo.getPass() : "+userVo.getPass());
 		
 		
-		//	-> db에서 조회한 사용자 비밀번호가 파라미터로 전송한 비번과 동일여부 비교 
 		
-		if(//userId.equals(userVo.getUserId())&&
-				userVo!=null&&
-				password.equals(userVo.getPass())){
+		//	-> db에서 조회한 사용자 비밀번호가 파라미터로 전송한 비번과 동일여부 비교 
+//		if(//userId.equals(userVo.getUserId())&&
+//				userVo!=null&& password.equals(userVo.getPass())){
+		//*** 암호화 
+		String encryptPass=KISA_SHA256.encrypt(password);
+		
+		// userVo.getPass().equals(encryptPass) <- 너무 노출되어있다 <- 로직 부분 : 데이터베이스의 벨류와 암호화 비교 
+		// if( userVo!=null && userVo.getPass().equals(encryptPass)){
+		if( userVo!=null && userVo.authPass(encryptPass)){
 		
 			//*** Redirect 방식
 			//resp.sendRedirect("main.jsp");

@@ -43,7 +43,11 @@
 						<div class="col-sm-10">
 
 							<c:choose>
+<<<<<<< HEAD
 								<c:when test="${userVo.profile!=null}"><c:set var="profile" value="${userVo.profile}" /></c:when>
+=======
+								<c:when test="${userVo.profile!=null}"> <c:set var="profile" value="${userVo.profile}" /> </c:when>
+>>>>>>> branch 'JspAddPage_Update' of https://github.com/normalstory/201805jsp.git
 								<c:otherwise> <c:set var="profile" value="/profile/noimage.png" /> </c:otherwise>
 							</c:choose>
 
