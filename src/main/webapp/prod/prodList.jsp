@@ -17,10 +17,11 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>userAllList</title>
+<title>prodList</title>
 
 <!-- basicLib -->
 <%@ include file="/common/basicLib.jsp"%>
+
 
 <!-- 사용자 클릭해서 상세화면으로 이동 -->
 <style type="text/css">
@@ -32,34 +33,21 @@
 	function userName(a){
 		alert(a);
 	}
-
 	$(document).ready(function(){
 		console.log("document.ready");
-		
-		//tr에 select (class="userClick")
-		//$(".userClick").click(function(){
-		//	console.log("userClick");
-		//});
-		
 		var ec="click"
 		$(".userClick").on(ec,function(){
 			console.log("userClick");
-			
-			var userId = $(this).children()[1].innerText;
-		
-			$("#userId").val(userId);
-			//폼태그 지정.submit();
-			$("#frm").submit();
-		
+			var prod_id = $(this).children()[0].innerText;
+			$("#prod_id").val(prod_id);
+			$("#frm").submit();//폼태그 지정
 		});
-		
 	});	
 </script>
-
 </head>
 
-<form id="frm" action="/userDetail" method="get">
-	<input type="hidden" id="userId" name="userId">
+<form id="frm" action="/prodDetail" method="get">
+	<input type="hidden" id="prod_id" name=prod_id>
 </form>
 
 <body>
@@ -76,48 +64,47 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자</h2>
+						<h2 class="sub-header">제품리스트</h2>
 
 						<div class="table-responsive">
 
 							<table class="table table-striped table-hover">
 								<tr>
-									<th>번호</th>
-									<th>사용자 아이디</th>
-									<th>사용자 이름</th>
-									<th>생일</th>
+									<th>제품아이디</th>
+									<th>제품명</th>
+									<th>제품그룹명</th>
+									<th>제품등록일</th>
 								</tr>
 
-								<!-- userList loop 출력 -->
-								<c:forEach items="${pagelist }" var="user" >
-								
+								<!-- prodList loop 출력 -->
+								<c:forEach items="${prodList }" var="prod">
 								<tr class="userClick" >
-									<td>${user.rnum }</td>
-									<td>${user.userId }</td>
-									<td>${user.name }</td>
-									<td><fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd"/></td>
+									<td>${prod.prod_id }</td>
+									<td>${prod.prod_name }</td>
+									<td>${prod.lprod_nm }</td>
+									<td><fmt:formatDate value="${prod.prod_insdate }" pattern="yyyy/MM/dd"/></td>
 								</tr>
 								</c:forEach>
 							</table>
 							
 						</div>
 
-						<a class="btn btn-default pull-right" href="/userForm">사용자 등록</a>
+						<a class="btn btn-default pull-right" href="/userForm">제품 등록</a>
 
 						<div class="text-center">
 							<ul class="pagination">
 								<li>
-									<a href="/userPageList?page=1&pageSize=10" aria-label="Previous"> 
+									<a href="/prodList?page=1&pageSize=10" aria-label="Previous"> 
 										<span aria-hidden="true">&laquo;</span>
 									</a>
 								</li>
 																
 								<c:forEach begin="1" end="${pageCnt }" var="p">
-								<li><a href="/userPageList?page=${p}&pageSize=10">${p}</a></li>
+								<li><a href="/prodList?page=${p}&pageSize=10">${p}</a></li>
 								</c:forEach>
 								
 								<li>
-									<a href="/userPageList?page=${pageCnt }&pageSize=10" aria-label="Next"> 
+									<a href="/prodList?page=${pageCnt }&pageSize=10" aria-label="Next"> 
 										<span aria-hidden="true">&raquo;</span>
 									</a>
 								</li>
