@@ -13,9 +13,9 @@
 		//db connection pooling
 		BasicDataSource bd = new BasicDataSource();
 		//***db 기본접속정보 
-		bd.setUsername("pc03");
-		bd.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bd.setPassword("java");
+		bd.setUsername("system");
+		bd.setUrl("jdbc:oracle:thin:@localhost:59161:xe");
+		bd.setPassword("oracle");
 		bd.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		
 		//bd connection 초기 사이즈 설정  

@@ -16,9 +16,9 @@ public class JDBCTest01 {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user = "pc03"; 
-			String pass = "java"; 
+			String url = "jdbc:oracle:thin:@localhost:59161:xe";
+			String user = "system"; 
+			String pass = "oracle"; 
 			conn = DriverManager.getConnection(url, user, pass);
 			
 			stmt = conn.createStatement();

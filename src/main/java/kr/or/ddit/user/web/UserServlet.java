@@ -28,8 +28,7 @@ public class UserServlet extends HttpServlet {
 		//요청 URL로 로직 분기 
 		String uri = request.getRequestURI();
 		System.out.println("doGet() on UserServlet :"+uri);
-		
-		
+
 		//사용자 전체 조회
 		if(uri.equals("/userAllList")){
 			userAllList(request, response);
