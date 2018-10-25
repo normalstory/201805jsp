@@ -13,10 +13,13 @@
 </style>
 <body>
 
+${param.number } 
+from http://localhost:8081/jstl/core_import.jsp
+
 <table>
 <c:forEach begin="1" end="9" var="i">
 	<tr>
-		<c:forEach begin="2" end="9" var="j">
+		<c:forEach begin="2" end="${param.number }" var="j">
 			<c:set var="times" value="${j}x${i}=${i*j}"/>
 			<td>${times}</td>
 		</c:forEach>

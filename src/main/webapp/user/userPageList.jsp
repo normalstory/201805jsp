@@ -90,13 +90,12 @@
 
 								<!-- userList loop 출력 -->
 								<c:forEach items="${pagelist }" var="user" >
-								
-								<tr class="userClick" >
-									<td>${user.rnum }</td>
-									<td>${user.userId }</td>
-									<td>${user.name }</td>
-									<td><fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd"/></td>
-								</tr>
+									<tr class="userClick" >
+										<td>${user.rnum }</td>
+										<td>${user.userId }</td>
+										<td>${user.name }</td>
+										<td><fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd"/></td>
+									</tr>
 								</c:forEach>
 							</table>
 							

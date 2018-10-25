@@ -92,6 +92,7 @@ public class LoginServlet extends HttpServlet{
 		//	-> db에서 조회한 사용자 비밀번호가 파라미터로 전송한 비번과 동일여부 비교 
 //		if(//userId.equals(userVo.getUserId())&&
 //				userVo!=null&& password.equals(userVo.getPass())){
+		
 		//*** 암호화 
 		String encryptPass=KISA_SHA256.encrypt(password);
 		

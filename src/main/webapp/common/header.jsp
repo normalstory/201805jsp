@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <% request.setAttribute("test", "test"); %>
 <script type="text/javascript">
@@ -30,8 +31,13 @@
 			</button>
 			<%-- a class="navbar-brand" href="#">JSP/SPRING	<%--= hello --%><%-- ${userVo.name}님 안녕하세요</a> --%>
 			<a class="navbar-brand" href="#">JSP/SPRING	 
-			<c:if test="${S_USER.name!=null}"> ${S_USER.name}님 </c:if> 안녕하세요</a> 
+			<%--c:if test="${S_USER.name!=null}"> ${S_USER.name}님 </c:if> 안녕하세요</a> --%>
 			
+			<fmt:bundle basename="kr.or.ddit.resource.msg.msg">
+				<fmt:message key="visitor">
+					<fmt:param value="${S_USER.name}"> </fmt:param>
+				</fmt:message>
+			</fmt:bundle>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
