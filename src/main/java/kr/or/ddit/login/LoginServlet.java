@@ -18,6 +18,7 @@ import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
 
 public class LoginServlet extends HttpServlet{
+	
 	//아이디, 비번을 DB대신 상수로 대체 
 	//private final String USERID="brown";
 	//private final String PASSWORD="password1234";
@@ -28,6 +29,19 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		//10/27 파라미터를 추가하려함 
+		//Map<String, String[]> reqMap = req.getParameterMap();
+		//reqMap.put("newParameter", new String[]{"newValue"}); 
+		// <-- 보안상 막음: 개발자가 값을 수정할 수 없어서 필터를 통해 재정의 작업을 진행  
+		//     <-- 필터 ParameterWrapper를 통해 우회 시도
+		
+		String newParameter = req.getParameter("newParameter");
+		System.out.println("newParameter : "+newParameter);
+		
+		
+		
+		
 		
 		// 1. 사용자 아이디, 비번을  request객채에서 받아온다 
 		// 2. db에서 조회해 온 아이디, 비번을 체크

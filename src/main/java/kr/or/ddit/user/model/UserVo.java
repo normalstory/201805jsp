@@ -3,7 +3,10 @@ package kr.or.ddit.user.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserVo {
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class UserVo implements HttpSessionBindingListener{
 	private String userId;
 	private String name;
 	private String pass;
@@ -146,6 +149,19 @@ public class UserVo {
 	*/
 	public boolean authPass(String encryptPass) {
 		return getPass().equals(encryptPass);
+	}
+
+	
+	//오브젝트 바인딩
+	//어떤 객체가 세션에 들어갈때 자기 자신이 들어갈때 알려주는 메서드 
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		System.out.println("userVo 객체에 추가된 내역 : " + event.getName());
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		
 	}
 
 }

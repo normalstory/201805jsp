@@ -42,13 +42,24 @@
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
 
+							<%-- brownc 다운로드용 예제 ---- c:otherwise --%>
 							<c:choose>
-<<<<<<< HEAD
-								<c:when test="${userVo.profile!=null}"><c:set var="profile" value="${userVo.profile}" /></c:when>
-=======
-								<c:when test="${userVo.profile!=null}"> <c:set var="profile" value="${userVo.profile}" /> </c:when>
->>>>>>> branch 'JspAddPage_Update' of https://github.com/normalstory/201805jsp.git
-								<c:otherwise> <c:set var="profile" value="/profile/noimage.png" /> </c:otherwise>
+								<c:when test="${userVo.profile == null}">
+									<img src="/profile/noimage.png">
+								</c:when>
+								<c:otherwise>
+									<img src="/fileDownload?userId=${ userVo.userId}">
+								</c:otherwise>
+							</c:choose>
+							
+			<%--
+							<c:choose>
+								<c:when test="${userVo.profile!=null}">
+									<c:set var="profile" value="${userVo.profile}" /> 
+								</c:when>
+								<c:otherwise> 
+									<c:set var="profile" value="/profile/noimage.png" />
+								</c:otherwise>
 							</c:choose>
 
 							<div id="imgFrame">
@@ -56,7 +67,7 @@
 								<p id="pP">${profile}<br />
 								</p>
 							</div>
-
+ 		  	--%>
 						</div>
 					</div>
 

@@ -8,10 +8,11 @@
 </head>
 <body>
 
-<h3>View.jsp</h3>
+<h3>View.jsp = userNm : ${userNm }</h3>
 
 <form action="/filterServlet" method="post">
-	
+	<input type="text" name="userNm" value="브라운">
+	<button type="submit">전송</button>
 </form>
 
 </body>
