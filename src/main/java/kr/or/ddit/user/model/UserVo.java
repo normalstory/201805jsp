@@ -1,8 +1,12 @@
 package kr.or.ddit.user.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserVo {
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class UserVo implements HttpSessionBindingListener{
 	private String userId;
 	private String name;
 	private String pass;
@@ -51,20 +55,21 @@ public class UserVo {
 		this.pass = pass;
 	}
 
-	public String getAdd1() {
+
+	public String getAddr1() {
 		return addr1;
 	}
 
-	public void setAdd1(String add1) {
-		this.addr1 = add1;
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
 	}
 
-	public String getAdd2() {
+	public String getAddr2() {
 		return addr2;
 	}
 
-	public void setAdd2(String add2) {
-		this.addr2 = add2;
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
 	}
 
 	public String getZipcd() {
@@ -78,8 +83,17 @@ public class UserVo {
 	public Date getBirth() {
 		return birth;
 	}
+	
+	public String getBirthFomat(Date birth) {
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String toDate = transFormat.format(birth);
+		
+		return toDate;
+	}
 
 	public void setBirth(Date birth) {
+
 		this.birth = birth;
 	}
 
@@ -122,6 +136,32 @@ public class UserVo {
 				+ ", birth=" + birth + ", email=" + email + ", tel=" + tel
 				+ ", profile=" + profile + ", alias=" + alias + ", rnum="
 				+ rnum + "]";
+	}
+
+	
+	/**
+	* Method : authPass
+	* 작성자 : pc03
+	* 변경이력 :
+	* @param encryptPass
+	* @return
+	* Method 설명 : 비밀번호 검증
+	*/
+	public boolean authPass(String encryptPass) {
+		return getPass().equals(encryptPass);
+	}
+
+	
+	//오브젝트 바인딩
+	//어떤 객체가 세션에 들어갈때 자기 자신이 들어갈때 알려주는 메서드 
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		System.out.println("userVo 객체에 추가된 내역 : " + event.getName());
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		
 	}
 
 }

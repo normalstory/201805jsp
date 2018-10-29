@@ -6,16 +6,19 @@ import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.or.ddit.encript.sha.KISA_SHA256;
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
 
 public class LoginServlet extends HttpServlet{
+	
 	//아이디, 비번을 DB대신 상수로 대체 
 	//private final String USERID="brown";
 	//private final String PASSWORD="password1234";
@@ -26,6 +29,19 @@ public class LoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+
+		//10/27 파라미터를 추가하려함 
+		//Map<String, String[]> reqMap = req.getParameterMap();
+		//reqMap.put("newParameter", new String[]{"newValue"}); 
+		// <-- 보안상 막음: 개발자가 값을 수정할 수 없어서 필터를 통해 재정의 작업을 진행  
+		//     <-- 필터 ParameterWrapper를 통해 우회 시도
+		
+		String newParameter = req.getParameter("newParameter");
+		System.out.println("newParameter : "+newParameter);
+		
+		
+		
+		
 		
 		// 1. 사용자 아이디, 비번을  request객채에서 받아온다 
 		// 2. db에서 조회해 온 아이디, 비번을 체크
@@ -35,6 +51,41 @@ public class LoginServlet extends HttpServlet{
 		//1
 		String userId 	= req.getParameter("userId");
 		String password = req.getParameter("password");
+		
+		//remember-me 추가  -> 쿠키생성
+		String rememberMe = req.getParameter("remember-me");
+		System.out.println("rememberMe : "+rememberMe);
+		if(rememberMe==null){
+			//아이디 기억 안사용
+			Cookie[] cookies = req.getCookies();	//다 가져온다
+			
+			for(Cookie cookie :cookies ){
+				System.out.println("> before cookie : "+ cookie.getName());
+				
+				//세션은 삭제 메서드 없다
+				if(cookie.getName().equals("rememberMe") || 
+				   cookie.getName().equals("userId")){
+					
+					cookie.setMaxAge(0);
+					System.out.println("< after cookie : "+ cookie.getName());
+					
+					resp.addCookie(cookie);
+				}
+			}
+			
+		}else{
+			//아이디 기억 사용
+			Cookie cookie = new Cookie("rememberMe", "Y");
+			Cookie userIdCookie = new Cookie("userId",userId);
+			
+			resp.addCookie(cookie);
+			resp.addCookie(userIdCookie);
+		}
+		
+		
+		// 확인용 테스트
+		System.out.println("userId :" + userId);
+		System.out.println("password : "+ password);
 		
 		//2 아이디, 비번을 DB대신 상수로 대체 
 		//UserDao userDao = new UserDao();   <----- 컨트롤 > 서비스 > DAO > 서블릿
@@ -51,11 +102,17 @@ public class LoginServlet extends HttpServlet{
 		System.out.println("userVo.getPass() : "+userVo.getPass());
 		
 		
-		//	-> db에서 조회한 사용자 비밀번호가 파라미터로 전송한 비번과 동일여부 비교 
 		
-		if(//userId.equals(userVo.getUserId())&&
-				userVo!=null&&
-				password.equals(userVo.getPass())){
+		//	-> db에서 조회한 사용자 비밀번호가 파라미터로 전송한 비번과 동일여부 비교 
+//		if(//userId.equals(userVo.getUserId())&&
+//				userVo!=null&& password.equals(userVo.getPass())){
+		
+		//*** 암호화 
+		String encryptPass=KISA_SHA256.encrypt(password);
+		
+		// userVo.getPass().equals(encryptPass) <- 너무 노출되어있다 <- 로직 부분 : 데이터베이스의 벨류와 암호화 비교 
+		// if( userVo!=null && userVo.getPass().equals(encryptPass)){
+		if( userVo!=null && userVo.authPass(encryptPass)){
 		
 			//*** Redirect 방식
 			//resp.sendRedirect("main.jsp");
@@ -84,7 +141,7 @@ public class LoginServlet extends HttpServlet{
 //			UserVo userVo = getUser(userId);
 //			request.setAttribute("userVo", userVo);  //request 객체 : 개발자가 로직을 통해 저장하는 부분 VS 파라미터 
 			//세션객체에 넣기 
-			req.getSession().setAttribute("userVo", userVo);
+			req.getSession().setAttribute("S_USER", userVo);
 			
 
 			//3-1)-> main.jsp로 이동 

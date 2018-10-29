@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
+import kr.or.ddit.util.CustomDateHandler;
 import kr.or.ddit.util.model.PageVo;
 
 @WebServlet(urlPatterns={"/userAllList", "/userPageList", "/userDetail"})
@@ -27,8 +28,7 @@ public class UserServlet extends HttpServlet {
 		//요청 URL로 로직 분기 
 		String uri = request.getRequestURI();
 		System.out.println("doGet() on UserServlet :"+uri);
-		
-		
+
 		//사용자 전체 조회
 		if(uri.equals("/userAllList")){
 			userAllList(request, response);
@@ -57,10 +57,12 @@ public class UserServlet extends HttpServlet {
 		String id = request.getParameter("userId");
 				
 		System.out.println("id : "+id);
+		
 		// 사용자 아이디에 해당하는 해당 사용자 정보조회
 		UserServiceInf userService = new UserService();
 		UserVo userVo = userService.selectUser(id);
 		System.out.println("userVo : "+userVo);
+		System.out.println("date : "+userVo.getBirth());
 		
 		// jsp로 위임을 위해 사용자 정보를 request에 저장 
 		request.setAttribute("userVo", userVo);
@@ -143,7 +145,7 @@ public class UserServlet extends HttpServlet {
 		
 		//application - a사용자가 1페이지 조회하는 동안 b사용자가 5페이지를 조회하면 a 사용자는 5페이지를 보게된다 
 			//	-> 설정과 관련된 부분 값을 저장(사용) 
-		getServletContext().setAttribute("userList", userList);
+		//getServletContext().setAttribute("userList", userList);
 		
 		//session - 어느 페이지에 가도 사용자의 정보(이름)이 보여야 한다, 상시 자주 참조, 데이터가 많은 경우 과부화(OOM) 발생
 			//	-> 프로토컬의 특성상 적어도 30분동안 유효 

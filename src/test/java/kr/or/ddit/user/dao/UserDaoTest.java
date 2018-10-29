@@ -142,8 +142,8 @@ public class UserDaoTest {
 		userVo.setUserId(TEST_USERID);
 		userVo.setName("nameee13");
 		userVo.setPass("passee13");
-		userVo.setAdd1("addr1ee");
-		userVo.setAdd2("addr2ee");
+		userVo.setAddr1("addr1ee");
+		userVo.setAddr2("addr2ee");
 		userVo.setZipcd("zipcd");
 		GregorianCalendar gc = new GregorianCalendar(2018,7,8);
 		userVo.setBirth(new Date(gc.getTimeInMillis()));

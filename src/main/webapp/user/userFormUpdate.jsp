@@ -2,6 +2,8 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -27,19 +29,8 @@
 <!-- 다음 주소 api -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-			<% UserVo user = (UserVo)request.getAttribute("userVo"); %>
 <script>
 $(document).ready(function(){
-	//개발과정 기본값 설정
-	            $("#userId").val(<%=user.getUserId()%>);
-	            $("#name").val(<%=%>);
-	            $("#pass").val(<%=%>);
-	            $("#addr1").val(<%=%>);
-	            $("#addr2").val(<%=%>);
-	            $("#zipcd").val(<%=%>);
-	            $("#birth").val(<%=%>);
-	            $("#email").val(<%=%>);
-	            $("#tel").val(<%=%>);
 	
 	//생일 input datepicker 적용 
 	$("#birth").datepicker(
@@ -73,11 +64,31 @@ $(document).ready(function(){
 	            $("#zipcd").val(data.zonecode);
 	        }
 	    }).open();
+	});
+	
+	$("#del_PicBtn").click(function(){
+		$("#img").css('display','none');
+		$("#profile").css('display','block');
+		$("#del_PicBtn").css('display','none');
+		$("#pP").css('display','none');
+		
+		//여기까지 (안나옮)
+		//$("img").attr('src','/Users/bhuanchanwoo/git/201805jsp/src/main/webapp/profile/noimage.png');
+		$("img").attr('src','D:\A_TeachingMaterial\6.JspSrpgin\workspace\jsp\src\main\webapp\profile\noimage.png');
+		
+		//-> 디데일.jsp ->(버튼)파라미터 보내기 -> form 다시 입력한 후 저장(업데이트)하기 -> 리스트 페이지로 
+		
 		
 	});
 });
     
 </script>
+
+<style type="text/css">
+#profile{
+	display: none;
+}
+</style>
 
 </head>
 
@@ -94,85 +105,95 @@ $(document).ready(function(){
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<form method="post" action="/userFormUpdate?userId="+<%=user.getUserId()+"\""%> class="form-horizontal" role="form" enctype="multipart/form-data">
+				<form method="post" action="/userFormUpdate" class="form-horizontal" role="form" enctype="multipart/form-data">
 
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 						<div class="col-sm-10">
-							<input type="file" name="profile">
+						
+							<c:choose>
+							<c:when test="${userVo.profile!=null }"><c:set var="profilePic" value="${userVo.profile}"/></c:when>
+							<c:otherwise><c:set var="profilePic" value="/profile/noimage.png"/></c:otherwise>
+							</c:choose>
+							
+							<div id="imgFrame">
+								<img id="img" src="${profilePic }"><br/>
+								<p id="pP">${profilePic }<br/></p>
+							</div>
+							<input id="del_PicBtn" type="button" name="del_PicBtn" value="사진교체">
+							<input id="profile" type="file" name="profile" >
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
+						<label for="userNm" class="col-sm-2 control-label">아이디</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="userId" name="userId"
+							<input type="text" class="form-control" id="userId" name="userId" readonly="readonly" value="${userVo.userId }"
 								placeholder="사용자 아이디">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">이름</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="name" name="name"
+							<input type="text" class="form-control" id="name" name="name" value="${userVo.name }"
 								placeholder="이름">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="userNm" class="col-sm-2 control-label">사용자
-							패스워드</label>
+						<label for="userNm" class="col-sm-2 control-label">패스워드</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="pass"
+							<input type="password" class="form-control" id="pass" value="${userVo.pass }"
 								name="pass" placeholder="사용자 패스워드">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="addr1" name="addr1"
+							<input type="text" class="form-control" id="addr1" name="addr1" value="${userVo.addr1 }"
 								placeholder="주소" readonly="readonly">
 							<!-- 주소검색 버튼 -->
 							<button id="addrSearchBtn" type="button" class="btn btn-default">주소검색</button>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="userNm" class="col-sm-2 control-label">주소 상세 </label>
+						<label for="userNm" class="col-sm-2 control-label">주소 상세</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="addr2" name="addr2"
+							<input type="text" class="form-control" id="addr2" name="addr2" value="${userVo.addr2 }"
 								placeholder="주소 상세">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">우편번호</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="zipcd" name="zipcd"
+							<input type="text" class="form-control" id="zipcd" name="zipcd" value="${userVo.zipcd }"
 								placeholder="우편번호">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">생년월일</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="birth" name="birth"
-								placeholder="생년월일">
+							<input type="text" class="form-control" id="birth" name="birth" 
+							value="<fmt:formatDate value='${userVo.birth }' pattern='yyyy-MM-dd'/>" placeholder="생년월일">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">이메일</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="email" name="email"
+							<input type="text" class="form-control" id="email" name="email" value="${userVo.email }"
 								placeholder="이메일">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">전화번호</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="tel" name="tel"
+							<input type="text" class="form-control" id="tel" name="tel" value="${userVo.tel }"
 								placeholder="전화번호">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">사용자 등록</button>
+							<button type="submit" class="btn btn-default" >수정내용 저장</button>
 						</div>
 					</div>
 				</form>

@@ -30,15 +30,15 @@
 <script>
 $(document).ready(function(){
 	//개발과정 기본값 설정
-	            $("#userId").val();
-	            $("#name").val("testUserId");
-	            $("#pass").val("Pass1234");
-	            $("#addr1").val("대전 중구 중앙로76");
-	            $("#addr2").val("영민빌딩 2층 대덕인재개발원");
-	            $("#zipcd").val("34940");
-	            $("#birth").val("2018-08-08");
-	            $("#email").val("newUser@gmail.com");
-	            $("#tel").val("0422228202");
+	           // $("#userId").val();
+	           // $("#name").val("testUserId");
+	           // $("#pass").val("Pass1234");
+	           // $("#addr1").val("대전 중구 중앙로76");
+	           // $("#addr2").val("영민빌딩 2층 대덕인재개발원");
+	           // $("#zipcd").val("34940");
+	           // $("#birth").val("2018-08-08");
+	           // $("#email").val("newUser@gmail.com");
+	           // $("#tel").val("0422228202");
 	
 	//생일 input datepicker 적용 
 	$("#birth").datepicker(
