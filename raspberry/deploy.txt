@@ -1,0 +1,9 @@
+cd /home/pi/deploy/201805jsp
+git pull
+mvn clean package -Dmaven.test.skip=true
+rm ~/deploy/201805jsp/target/jsp-0.0.1-SNAPSHOT/WEB-INF/classes/kr/or/ddit/db/db.properties  
+cp ~/deploy/db.properties ~/deploy/201805jsp/target/jsp-0.0.1-SNAPSHOT/WEB-INF/classes/kr/or/ddit/db/
+~/was/tomcat7/bin/shutdown.sh
+rm -rf ~/was/tomcat7/webapps/ROOT
+cp -rf ~/deploy/201805jsp/target/jsp-0.0.1-SNAPSHOT ~/was/tomcat7/webapps/ROOT
+~/was/tomcat7/bin/startup.sh
