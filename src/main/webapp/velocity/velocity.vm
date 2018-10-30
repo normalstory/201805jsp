@@ -1,0 +1,26 @@
+
+<html>
+
+	<head>
+		<title> velocity </title>
+	</head>
+	
+	<body>
+	
+		<h2>parameters</h2>
+		application.applicationAttr : $!application.applicationAttr <br/>
+		session.sessionAttr			: $!session.sessionAttr			<br/>
+		request.requestAttr			: $!request.requestAttr			<br/>
+		
+		<h2>vm loop</h2>
+		#foreach($ranger in $!rangers)
+			$ranger	<br/>
+		#end
+		
+		#if($!rangers.size()>0)
+			0보다 크다	<br/>
+		#end
+	</body>
+
+</html>
+
